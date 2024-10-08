@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "John",
+        "age": 30,
+        "username": "John Cena",
+        "password": "12345"
+    },
+    {
+        "id": 2,
+        "name": "Jane",
+        "age": 43,
+        "username": "Jane Doe",
+        "password":  "67890"
+    },
+    {
+        "id": 3,
+        "name": "Bob",
+        "age": 56,
+        "username": "Bob  Smith",
+        "password": "11111"
+    }
+]
