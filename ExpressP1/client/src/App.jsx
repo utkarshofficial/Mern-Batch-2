@@ -4,6 +4,7 @@ import DateTime from './components/DateTime'
 import Users from './components/Users'
 import Home from './components/Home'
 import User from './components/User'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   
