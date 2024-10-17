@@ -1,0 +1,23 @@
+emps = {
+    _id: 82345f6h238h2cvh28f,
+    emp_id: 101024917,
+    name: "John Doe",
+    email: "johndoe@example.com",
+    "phoneNumbers": [
+        {
+            "type": "home",
+            "number": "123-456-7890"
+        },
+        {
+            "type": "work",
+            "number": "098-765-4321"
+        }
+    ],
+}
+
+university = {
+    emp_id:  101024917,
+    position: "Teacher",
+    salary: 70000,
+    workingHours: 40
+}

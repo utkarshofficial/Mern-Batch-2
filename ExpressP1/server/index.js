@@ -3,7 +3,9 @@ const cors = require('cors')
 const app = express()
 const port = 5500
 
+app.use('/assets', express.static(__dirname + '/public/assets'))
 app.use(cors())
+
 
 app.get('/date', (req, res)=>{
     const date = new Date()
@@ -68,3 +70,13 @@ app.get("/users/:id", (req, res)=>{
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`)
 })
+
+const mongoose = require("mongoose")
+const mongoDBURL = "mongodb://localhost:27017/school"
+
+mongoose.connect(mongoDBURL)
+.then(()=>{
+    console.log("Connected to MongoDB")
+    console.log("Username", process.env.MONGODB_USERNAME)
+})
+
