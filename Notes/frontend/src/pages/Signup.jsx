@@ -8,7 +8,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordMatched, setIsPasswordMatched] = useState(true)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if(password != confirmPassword){
       setIsPasswordMatched(false)
@@ -18,12 +18,11 @@ const Signup = () => {
 
     try{
       const apiURL = "http://localhost:5000/api/auth/register"
-      const response = axios.post(apiURL, {
-        fullName,
+      const response = await axios.post(apiURL, {
+        full_name: fullName,
         email,
         password
       })
-
       console.log(response)
     }
     catch(err){
