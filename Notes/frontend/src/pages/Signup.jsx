@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [fullName, setFullName] = useState("");
@@ -8,6 +8,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordMatched, setIsPasswordMatched] = useState(true)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +25,8 @@ const Signup = () => {
         email,
         password
       })
-      console.log(response)
+      
+      navigate("/login")
     }
     catch(err){
       console.log(err)
