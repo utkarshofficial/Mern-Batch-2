@@ -27,7 +27,11 @@ router.post("/register", async (request, response) => {
 
     await newUser.save()
 
-  } catch (error) {}
+    return response.status(200).json({success: true, message: "Account is created successfully"})
+
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 export default router
