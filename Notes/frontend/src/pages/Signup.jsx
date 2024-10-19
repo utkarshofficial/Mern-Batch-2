@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [fullName, setFullName] = useState("");
@@ -76,7 +77,8 @@ const Signup = () => {
           Submit
         </button>
         <p>
-          Already have an account <a href="">Log in</a>
+          Already have an account 
+          <Link to={"/login"}>Log in</Link>
         </p>
       </form>
     </div>
