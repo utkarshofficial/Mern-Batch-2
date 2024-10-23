@@ -20,7 +20,7 @@ const Login = () => {
       })
       
       if(response.data.success){
-        // using context to save user data and token
+        // using context to save user data and toeken
         login(response.data)
         navigate("/")
       }

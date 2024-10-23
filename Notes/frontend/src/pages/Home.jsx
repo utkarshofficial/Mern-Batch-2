@@ -1,11 +1,12 @@
 import React from 'react'
 import MyNavbar from '../components/MyNavbar'
+import NoteModel from '../components/NoteModel'
 
 const Home = () => {
   return (
     <div>
       <MyNavbar />
-      Home
+      <NoteModel/>
     </div>
   )
 }
