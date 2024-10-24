@@ -19,6 +19,10 @@ function NoteModel() {
       const response = await axios.post(apiURL, {
         title,
         description,
+      },{
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
       })
 
       if(response.data.success){
