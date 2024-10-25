@@ -13,6 +13,8 @@ function NoteModel({handleCreate}) {
   
   const handleClick = ()=>{
     handleCreate(title, description, handleClose)
+    setTitle("")
+    setDescription("")
   }
 
   return (
