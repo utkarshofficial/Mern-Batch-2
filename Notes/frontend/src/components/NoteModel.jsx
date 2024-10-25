@@ -1,38 +1,19 @@
-import axios from "axios";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 
-function NoteModel() {
+function NoteModel({handleCreate}) {
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const navigate = useNavigate()
-
-  const handleCreate = async () => {
-    try {
-      const apiURL = "http://localhost:5000/api/note/add"
-      const response = await axios.post(apiURL, {
-        title,
-        description,
-      },{
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
-        }
-      })
-
-      if(response.data.success){
-        handleClose();
-        navigate('/')
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  };
+  
+  const handleClick = ()=>{
+    handleCreate(title, description, handleClose)
+  }
 
   return (
     <>
@@ -74,7 +55,7 @@ function NoteModel() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleCreate}>
+          <Button variant="primary" onClick={handleClick}>
             Create
           </Button>
         </Modal.Footer>
