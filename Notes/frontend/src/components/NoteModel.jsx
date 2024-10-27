@@ -1,31 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 
-function NoteModel({handleCreate}) {
-  const [show, setShow] = useState(false);
+function NoteModel({handleCreate, show, handleCloseModal, handleShowModal, currentNote, updateNote}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
+  useEffect(()=>{
+    if(currentNote){
+      setTitle(currentNote.title);
+      setDescription(currentNote.description);
+    } 
+  }, [currentNote])
   
   const handleClick = ()=>{
-    handleCreate(title, description, handleClose)
-    setTitle("")
-    setDescription("")
+    if(currentNote){
+      updateNote(id, title, description)
+    }{
+      handleCreate(title, description)
+      setTitle("")
+      setDescription("")
+    }
   }
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShowModal}>
         Create Note
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Add new note</Modal.Title>
+          <Modal.Title>
+            {currentNote ? "Edit Note" : "Add new note"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -54,11 +64,11 @@ function NoteModel({handleCreate}) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleCloseModal}>
             Close
           </Button>
           <Button variant="primary" onClick={handleClick}>
-            Create
+            {currentNote ? "Update" : "Create"}
           </Button>
         </Modal.Footer>
       </Modal>

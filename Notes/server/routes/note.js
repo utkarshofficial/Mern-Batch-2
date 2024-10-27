@@ -37,4 +37,17 @@ router.get("/", async (request, response)=>{
   }
 })
 
+router.put("/:id", middleware, async (request, response) => {
+  try {
+    const {id} = request.params
+    // findbyidandupdate in db
+    // request.body.title,  request.body.description, timestamp
+    // return response success  message
+
+  } catch (error) {
+    
+  }
+})
+
+
 export default router
