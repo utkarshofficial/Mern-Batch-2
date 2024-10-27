@@ -14,6 +14,7 @@ function NoteCard({ note }) {
     if (seconds < 86400)
       return `${Math.floor(seconds / 3600)} hours
     `;
+    return `${Math.floor(seconds / 86400)} days ago`;
   };
 
   return (
@@ -25,7 +26,7 @@ function NoteCard({ note }) {
         <Card.Text>{note.description}</Card.Text>
       </Card.Body>
       <Card.Footer className="text-muted d-flex justify-content-between">
-        <p className="m-0">{new Date(note.timeStamp).toLocaleTimeString()}</p>
+        <p className="m-0">{timeAgo(note.timeStamp)}</p>
         <div>
           <MdEdit className="mx-1 text-primary" />
           <MdDelete className="mx-1 text-danger" />

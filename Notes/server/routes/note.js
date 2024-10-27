@@ -6,12 +6,13 @@ const router = express.Router();
 
 router.post("/add", middleware, async (request, response) => {
   try {
-    const { title, description } = request.body;
+    const { title, description} = request.body;
 
     const newNote = new Note({
       title,
       description,
       userId: request.user.id,
+      timeStamp: Date.now()
     });
 
     await newNote.save();

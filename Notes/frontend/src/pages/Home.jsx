@@ -27,7 +27,19 @@ const Home = () => {
 
       if (response.data.success) {
         handleClose();
-        navigate("/");
+        fetchNotes()
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchNotes = async () => {
+    try {
+      const apiURL = "http://localhost:5000/api/note/";
+      const response = await axios.get(apiURL);
+      if (response.data.success) {
+        setNotes(response.data.notes);
       }
     } catch (error) {
       console.log(error);
@@ -35,18 +47,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const apiURL = "http://localhost:5000/api/note/";
-        const response = await axios.get(apiURL);
-        if (response.data.success) {
-          setNotes(response.data.notes);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchNotes();
   }, []);
 
