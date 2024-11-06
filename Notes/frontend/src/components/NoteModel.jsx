@@ -17,7 +17,7 @@ function NoteModel({handleCreate, show, handleCloseModal, handleShowModal, curre
   
   const handleClick = ()=>{
     if(currentNote){
-      updateNote(id, title, description)
+      updateNote(currentNote._id, title, description)
     }{
       handleCreate(title, description)
       setTitle("")

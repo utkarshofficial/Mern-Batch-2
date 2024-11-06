@@ -42,10 +42,15 @@ router.put("/:id", middleware, async (request, response) => {
     const {id} = request.params
     // findbyidandupdate in db
     // request.body.title,  request.body.description, timestamp
+    const updatedData = {
+      ...request.body,
+      timeStamp: Date.now(),
+    }
+    const updateNote = await Note.findByIdAndUpdate(id, updatedData)
     // return response success  message
-
+    return response.status(200).json({success: true, updateNote, message: "Note is updated"})
   } catch (error) {
-    
+    return response.status(500).json({success: false, message: "Can't update note"})
   }
 })
 
