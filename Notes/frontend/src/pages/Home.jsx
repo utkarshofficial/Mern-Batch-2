@@ -92,7 +92,11 @@ const Home = () => {
   const fetchNotes = async () => {
     try {
       const apiURL = "http://localhost:5000/api/note/";
-      const response = await axios.get(apiURL);
+      const response = await axios.get(apiURL,{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
       if (response.data.success) {
         setNotes(response.data.notes);
       }

@@ -28,7 +28,7 @@ router.post("/add", middleware, async (request, response) => {
   }
 });
 
-router.get("/", async (request, response)=>{
+router.get("/", middleware, async (request, response)=>{
   try {
     const notes = await Note.find()
     return response.status(200).json({success: true, notes})
