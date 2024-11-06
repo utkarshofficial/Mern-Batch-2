@@ -54,5 +54,15 @@ router.put("/:id", middleware, async (request, response) => {
   }
 })
 
+router.delete("/:id", middleware, async (request, response)=>{
+  try {
+    const {id} = request.params
+    const deletedNote = await Note.findByIdAndDelete(id)
+    return response.status(200).json({success: true, deletedNote, message: "Note is deleted"})
+  } catch (error) {
+    return response.status(500).json({success: false, message: "Can't delete note"})
+  }
+})
+
 
 export default router

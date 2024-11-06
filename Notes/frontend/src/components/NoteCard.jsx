@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-function NoteCard({ note, handleEdit }) {
+function NoteCard({ note, handleEdit, deleteNote }) {
   // generate time  ago feature with seconds ago, minutes ago, hours ago and days ago
   const timeAgo = (time) => {
     const seconds = Math.floor((new Date() - new Date(time)) / 1000);
@@ -29,7 +29,8 @@ function NoteCard({ note, handleEdit }) {
         <p className="m-0">{timeAgo(note.timeStamp)}</p>
         <div>
           <MdEdit onClick={()=>{handleEdit(note)}} className="mx-1 text-primary" />
-          <MdDelete className="mx-1 text-danger" />
+          <MdDelete onClick={()=>{deleteNote(note._id)}} className="mx-1 text-danger" />
+
         </div>
       </Card.Footer>
     </Card>

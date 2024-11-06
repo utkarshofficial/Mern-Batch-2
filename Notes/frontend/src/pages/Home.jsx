@@ -35,7 +35,7 @@ const Home = () => {
 
       if (response.data.success) {
         fetchNotes();
-        handleCloseModal()
+        handleCloseModal();
       }
     } catch (error) {
       console.log(error);
@@ -60,16 +60,33 @@ const Home = () => {
 
       if (response.data.success) {
         fetchNotes();
-        handleCloseModal()
+        handleCloseModal();
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  const deleteNote = async (id) => {
+    try {
+      const apiURL = `http://localhost:5000/api/note/${id}`;
+      const response = await axios.delete(apiURL, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      if (response.data.success) {
+        fetchNotes();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleEdit = (note) => {
     setCurrentNote(note);
-    handleShowModal()
+    handleShowModal();
   };
 
   const fetchNotes = async () => {
@@ -102,7 +119,12 @@ const Home = () => {
         />
         <div className="notes d-flex gap-3 mt-2 flex-wrap">
           {notes.map((note) => (
-            <NoteCard handleEdit={handleEdit} note={note} key={note._id} />
+            <NoteCard
+              deleteNote={deleteNote}
+              handleEdit={handleEdit}
+              note={note}
+              key={note._id}
+            />
           ))}
         </div>
       </div>
