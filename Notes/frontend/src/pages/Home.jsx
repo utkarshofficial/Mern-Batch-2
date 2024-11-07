@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import MyNavbar from "../components/MyNavbar";
 import NoteModel from "../components/NoteModel";
 import NoteCard from "../components/NoteCard";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState(null);
   const [show, setShow] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredNotes, setFilteredNotes] = useState([]);
 
   const handleCloseModal = () => {
     setShow(false);
@@ -92,10 +93,10 @@ const Home = () => {
   const fetchNotes = async () => {
     try {
       const apiURL = "http://localhost:5000/api/note/";
-      const response = await axios.get(apiURL,{
-        headers:{
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
+      const response = await axios.get(apiURL, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
       if (response.data.success) {
         setNotes(response.data.notes);
@@ -109,9 +110,20 @@ const Home = () => {
     fetchNotes();
   }, []);
 
+  useEffect(() => {
+    let newFilteredNotes = notes.filter(
+      (note) =>
+        note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        note.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    setFilteredNotes(newFilteredNotes)
+    
+  }, [searchQuery, notes]);
+
   return (
     <div>
-      <MyNavbar />
+      <MyNavbar setSearchQuery={setSearchQuery} />
       <div className="container mt-2">
         <NoteModel
           handleCreate={handleCreate}
@@ -122,14 +134,18 @@ const Home = () => {
           updateNote={updateNote}
         />
         <div className="notes d-flex gap-3 mt-2 flex-wrap">
-          {notes.map((note) => (
-            <NoteCard
-              deleteNote={deleteNote}
-              handleEdit={handleEdit}
-              note={note}
-              key={note._id}
-            />
-          ))}
+          {filteredNotes.length > 0 ? (
+            filteredNotes.map((note) => (
+              <NoteCard
+                deleteNote={deleteNote}
+                handleEdit={handleEdit}
+                note={note}
+                key={note._id}
+              />
+            ))
+          ) : (
+            <p>No notes</p>
+          )}
         </div>
       </div>
     </div>

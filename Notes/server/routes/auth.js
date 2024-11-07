@@ -2,6 +2,7 @@ import express from "express";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
+import middleware from "../middleware/middleware.js";
 
 const router = express.Router();
 
@@ -92,5 +93,26 @@ router.post("/login", async (request, response) => {
       });
   }
 });
+
+router.post("/verify", middleware, async (request, response)=>{
+  try {
+    let user = request.user
+    console.log(user)
+    return response
+      .status(200)
+      .json({ 
+        success: true,
+        user: user, 
+        message: "Verified" 
+      });
+  } catch (error) {
+    return response
+      .status(500)
+      .json({ 
+        success: false,
+        message: "Error in verification" 
+      });
+  }
+})
 
 export default router;
