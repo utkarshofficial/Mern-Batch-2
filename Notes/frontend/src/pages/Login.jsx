@@ -23,10 +23,12 @@ const Login = () => {
         // using context to save user data and toeken
         login(response.data)
         navigate("/")
+      }else{
+        console.log(response.data)
       }
     }
     catch(err){
-      console.log(err)
+      alert(err.response.data.message)
     }
   };
 

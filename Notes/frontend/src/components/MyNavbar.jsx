@@ -7,7 +7,7 @@ import { IoSearch } from "react-icons/io5";
 import { InputGroup, Form } from "react-bootstrap";
 
 const MyNavbar = ({setSearchQuery}) => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   return (
     <Navbar className="bg-body-tertiary">
       <Container>
@@ -35,9 +35,9 @@ const MyNavbar = ({setSearchQuery}) => {
               <Navbar.Text className="m-1">
                 <span className="text-danger bg-light">{user.name.toUpperCase()}</span>
               </Navbar.Text>
-              <Link className="m-1" to="/logout">
+              <button onClick={logout} className="m-1" to="/logout">
                 Logout
-              </Link>
+              </button>
             </div>
           )}
         </Navbar.Collapse>

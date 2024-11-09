@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
+import axios from 'axios';
 
 const authContext = createContext()
 
@@ -11,8 +12,36 @@ const ContextProvider = ({children})=>{
         setUser(responseData.user)
     }
 
+    const logout = ()=>{
+        localStorage.removeItem('token')
+        setUser(null)
+        location.reload()
+    }
+    
+    useEffect(()=>{
+        const verifyUser = async ()=>{
+            try {
+                const apiURL = "http://localhost:5000/api/auth/verify"
+                const response = await axios.get(apiURL, {
+                    headers:{
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                if(response.data.success){
+                    setUser(response.data.user)
+                }else{
+                    setUser(null)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        verifyUser()
+    }, [])
+
     return (
-        <authContext.Provider value={{user, login}}>
+        <authContext.Provider value={{user, login, logout}}>
             {children}
         </authContext.Provider>
     )

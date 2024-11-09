@@ -3,6 +3,7 @@ import MyNavbar from "../components/MyNavbar";
 import NoteModel from "../components/NoteModel";
 import NoteCard from "../components/NoteCard";
 import axios from "axios";
+import {toast} from 'react-toastify';
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
@@ -78,6 +79,9 @@ const Home = () => {
       });
 
       if (response.data.success) {
+        toast.success("Note is deleted",{
+          position: "bottom-left"
+        })
         fetchNotes();
       }
     } catch (error) {

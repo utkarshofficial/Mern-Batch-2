@@ -22,7 +22,7 @@ const middleware = async (request, response, next)=>{
         }
 
         request.user  = {
-            name:  user.name,
+            name:  user.full_name,
             id:  user._id,
         }
         // forward request to next api/etc

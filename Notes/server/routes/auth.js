@@ -94,10 +94,9 @@ router.post("/login", async (request, response) => {
   }
 });
 
-router.post("/verify", middleware, async (request, response)=>{
+router.get("/verify", middleware, async (request, response)=>{
   try {
     let user = request.user
-    console.log(user)
     return response
       .status(200)
       .json({ 
