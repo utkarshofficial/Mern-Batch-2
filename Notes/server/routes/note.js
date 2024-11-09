@@ -11,8 +11,8 @@ router.post("/add", middleware, async (request, response) => {
     const newNote = new Note({
       title,
       description,
-      userId: request.user.id,
-      timeStamp: Date.now()
+      timeStamp: Date.now(),
+      user_id: request.user.id
     });
 
     await newNote.save();
@@ -30,12 +30,15 @@ router.post("/add", middleware, async (request, response) => {
 
 router.get("/", middleware, async (request, response)=>{
   try {
-    const notes = await Note.find()
+    let loggedInUserId = request.user.id
+    const notes = await Note.find({user_id: loggedInUserId})
+    console.log(request.user)
     return response.status(200).json({success: true, notes})
   } catch (error) {
     return  response.status(500).json({success: false, message: "server error"})
   }
 })
+
 
 router.put("/:id", middleware, async (request, response) => {
   try {
