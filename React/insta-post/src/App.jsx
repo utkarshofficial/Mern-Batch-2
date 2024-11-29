@@ -1,23 +1,36 @@
-import ImgButton from "./components/ImgButton"
-
-import { FiMessageCircle } from "react-icons/fi";
-
-import { CiHeart } from "react-icons/ci";
-
-import { IoPaperPlaneOutline } from "react-icons/io5";
-
-import { FaRegBookmark } from "react-icons/fa";
-
-import { BsThreeDotsVertical } from "react-icons/bs";
-import Post from "./components/Post";
-import "./App.css"
-
+import Users from "./components/Users"
+import UsersTable from "./components/UsersTable"
 function App() {
+  let userData = [
+    {
+      name: "Ram",
+      id: 546,
+      age: 43,
+      gender: "Male",
+    },
+    {
+      name: "Abhi",
+      id: 656,
+      age: 23,
+      gender: "Male",
+    },
+    {
+      name: "Raj",
+      id: 989,
+      age: 54,
+      gender: "Male",
+    },
+  ];
+
+
   return (
-    <div className="post">
-     <Post />
+    <div>
+      <Users/>
+      <UsersTable userData={userData}/>
     </div>
   )
 }
 
 export default App
+
+

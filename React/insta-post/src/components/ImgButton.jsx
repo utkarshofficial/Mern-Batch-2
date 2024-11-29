@@ -1,6 +1,8 @@
-const ImgButton = ({children}) => {
+import PropTypes from 'prop-types';
+
+const ImgButton = ({children, handleClick}) => {
   return (
-    <button style={{
+    <button onClick={handleClick} style={{
       border: "none",
       background: "none",
       textAlign: "center",
@@ -14,20 +16,10 @@ const ImgButton = ({children}) => {
   )
 }
 
+ImgButton.propTypes = {
+  children: PropTypes.node,
+  handleClick: PropTypes.func
+}
+
 export default ImgButton
 
-{/* <ImgButton> */}
-      {/* <CiHeart />
-     </ImgButton>
-     <ImgButton>
-      <FiMessageCircle />
-     </ImgButton>
-     <ImgButton>
-      <FaRegBookmark />
-     </ImgButton>
-     <ImgButton>
-      <BsThreeDotsVertical />
-     </ImgButton>
-     <ImgButton>
-      <IoPaperPlaneOutline />
-     </ImgButton> */}
