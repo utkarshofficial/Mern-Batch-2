@@ -1,5 +1,5 @@
-import Users from "./components/Users"
-import UsersTable from "./components/UsersTable"
+import Navigation from "./components/Navigation";
+
 function App() {
   let userData = [
     {
@@ -22,15 +22,7 @@ function App() {
     },
   ];
 
-
-  return (
-    <div>
-      <Users/>
-      <UsersTable userData={userData}/>
-    </div>
-  )
+  return <Navigation />;
 }
 
-export default App
-
-
+export default App;
