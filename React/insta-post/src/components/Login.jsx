@@ -1,17 +1,39 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate()
+
+  let user = {
+    email: "ram@gmail.com",
+    password: "123@r"
+  }
+
+  useEffect(()=>{
+    if(user.email == email 
+      && user.password == password
+    ){
+      // alert("Logged in !!")
+      navigate("/home")
+    }
+  }, [password])
 
   const handleSubmit = (e)=>{
     e.preventDefault()
     
-    console.log({
-      name,email,password
-    })
+    if(user.email == email 
+      && user.password == password
+    ){
+      alert("Logged in !!")
+      navigate("/home")
+      
+    }else{
+      alert("Username or password not found")
+    }
+
   }
 
   return (

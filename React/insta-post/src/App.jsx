@@ -1,4 +1,6 @@
-import Navigation from "./components/Navigation";
+import Navigation from './components/Navigation';
+
+
 
 function App() {
   let userData = [
@@ -22,7 +24,9 @@ function App() {
     },
   ];
 
-  return <Navigation />;
+  return <div>
+    <Navigation/>
+  </div>
 }
 
 export default App;
