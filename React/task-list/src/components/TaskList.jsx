@@ -5,7 +5,7 @@ const TaskList = ({taskList, handleDelete}) => {
 
   
   return (
-    <div>
+    <div className="h-[80%] overflow-auto">
       {taskList.map((task) => (
         <TaskCard task={task} key={task.id} handleDelete={handleDelete}/>
       ))}
