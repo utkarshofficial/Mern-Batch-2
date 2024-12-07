@@ -1,3 +1,4 @@
+import Popup from "../components/Popup";
 import TaskInput from "../components/TaskInput";
 import TaskList from "../components/TaskList";
 import { useState } from "react";
@@ -5,7 +6,12 @@ import { useState } from "react";
 const TaskWork = () => {
   const [taskList, setTaskList] = useState([
     // generate 10 random task with keys (id, description, completed, time)
-    { id: 1, description: "Task 1", completed: false, time: "10:00 AM" },
+    { 
+      id: 1, 
+      description: "Task 1", 
+      completed: false, 
+      time: "10:00 AM" 
+    },
     { id: 2, description: "Task 2", completed: false, time: "11:00 AM" },
     { id: 3, description: "Task 3", completed: false, time: "12:00 PM" },
     { id: 4, description: "Task 4", completed: false, time: "1:00 PM" },
@@ -23,8 +29,23 @@ const TaskWork = () => {
     setTaskList(newTask);
   };
 
+
   const handleAdd = (task) => {
-    setTaskList([...taskList, task]);
+    let newTaskList = [...taskList, task]
+    setTaskList(newTaskList)
+    
+    // setTaskList([...taskList, task]);
+  }
+
+  const handleUpdate = (newTask) =>{
+    let newTaskList = taskList.map(task=>{
+      if(task.id === newTask.id){
+        return newTask
+      }
+      return task
+    })
+
+    setTaskList(newTaskList)
   }
 
   return (
@@ -35,8 +56,8 @@ const TaskWork = () => {
       <TaskList 
         handleDelete={handleDelete} 
         taskList={taskList} 
-
       />
+      <Popup/>
     </div>
   );
 };

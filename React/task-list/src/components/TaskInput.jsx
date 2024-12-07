@@ -7,13 +7,13 @@ const TaskInput = ({ handleAdd }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(description.trim().length == 0) 
-        return
+      return
 
     const task = {
-        id: Math.floor(Math.random() * 1000) + 1,
-        description,
-        time: Date.now(),
-        complete: false,
+      id: Math.floor(Math.random() * 1000) + 1,
+      description,
+      time: Date.now(),
+      complete: false,
     }
     handleAdd(task);
 
