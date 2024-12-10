@@ -21,7 +21,6 @@ const TaskInput = ({ handleAdd }) => {
 
   };
 
-
   return (
     <form className="flex p-6 shadow-xl" onSubmit={(e) => handleSubmit(e)}>
       <input

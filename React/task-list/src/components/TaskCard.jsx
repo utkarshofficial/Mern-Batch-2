@@ -8,7 +8,12 @@ const TaskCard = ({ task, handleDelete, handleUpdate }) => {
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
 
-
+  const checkReadMore = (description)=>{
+    if(description.length > 100){
+      return description.slice(0, 100) + '...';
+    }
+    return description
+  }
 
   return (
     <>
@@ -26,7 +31,7 @@ const TaskCard = ({ task, handleDelete, handleUpdate }) => {
         <span className="text-xs">{task.time}</span>
       </div>
       <div className="content text-xl">
-        <p>{task.description}</p>
+        <p>{checkReadMore(task.description)}</p>
       </div>
       <div className="action-buttons flex justify-between">
         <input type="checkbox" name="completed" checked={task.completed} />
