@@ -6,8 +6,10 @@ const TaskInput = ({ handleAdd }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(description.trim().length == 0) 
+    if(description.trim().length == 0) {
+      alert("First enter task...")
       return
+    }
 
     const task = {
       id: Math.floor(Math.random() * 1000) + 1,

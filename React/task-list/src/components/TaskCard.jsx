@@ -4,45 +4,65 @@ import { useState } from "react";
 
 const TaskCard = ({ task, handleDelete, handleUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [popupFor, setPopupFor] = useState("View");
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
 
-  const checkReadMore = (description)=>{
-    if(description.length > 100){
-      return description.slice(0, 100) + '...';
+  const checkReadMore = (description) => {
+    if (description.length > 100) {
+      return description.slice(0, 100) + "...";
     }
-    return description
-  }
+    return description;
+  };
 
   return (
     <>
-      { isOpen && (
-        <Popup 
+      {isOpen && (
+        <Popup
           isOpen={isOpen}
           handleClose={handleClose}
           task={task}
           handleSubmit={handleUpdate}
+          popupFor={popupFor}
         />
-      ) }
-      <div className="task-card text-white m-3 p-3 bg-[#5E503F] rounded-lg">
-      <div className="task-header flex justify-between">
-        <p className="text-xs font-bold">Task Description</p>
-        <span className="text-xs">{task.time}</span>
-      </div>
-      <div className="content text-xl">
-        <p>{checkReadMore(task.description)}</p>
-      </div>
-      <div className="action-buttons flex justify-between">
-        <input type="checkbox" name="completed" checked={task.completed} />
-        <div className="flex gap-2">
-          <button className="edit font-bold px-3 rounded-md bg-[#22333B]" onClick={handleOpen}>Edit</button>
-          <button className="delete font-bold px-3 rounded-md bg-[#22333B]" onClick={() => handleDelete(task.id)}>
-            Delete
-          </button>
+      )}
+      <div
+        onClick={() => {
+          setPopupFor("View");
+          handleOpen()
+        }}
+        className="task-card text-white m-3 p-3 bg-[#5E503F] rounded-lg"
+      >
+        <div className="task-header flex justify-between">
+          <p className="text-xs font-bold">Task Description</p>
+          <span className="text-xs">{task.time}</span>
+        </div>
+        <div className="content text-xl">
+          <p>{checkReadMore(task.description)}</p>
+        </div>
+        <div className="action-buttons flex justify-between">
+          <input type="checkbox" name="completed" checked={task.completed} />
+          <div className="flex gap-2">
+            <button
+              className="edit font-bold px-3 rounded-md bg-[#22333B]"
+              onClick={(e) => {
+                setPopupFor("Update");
+                e.stopPropagation()
+                handleOpen();
+              }}
+            >
+              Edit
+            </button>
+            <button
+              className="delete font-bold px-3 rounded-md bg-[#22333B]"
+              onClick={() => handleDelete(task.id)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
