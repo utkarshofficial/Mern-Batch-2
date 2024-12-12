@@ -1,6 +1,11 @@
+import { ToastContainer, toast } from "react-toastify";
+
 import TaskInput from "../components/TaskInput";
 import TaskList from "../components/TaskList";
+
 import { useState } from "react";
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const TaskWork = () => {
   const taskData = [
@@ -23,11 +28,17 @@ const TaskWork = () => {
 
   const [taskList, setTaskList] = useState(taskData);
 
+  const toastOptions = {
+    position: "bottom-right",
+    theme: "dark",
+  };
+
   const handleDelete = (taskId) => {
     let newTask = taskList.filter((task) => {
       return taskId !== task.id;
     });
     setTaskList(newTask);
+    toast.success("Task deleted successfully", toastOptions);
   };
 
 
@@ -35,6 +46,7 @@ const TaskWork = () => {
     let newTaskList = [...taskList, task]
     setTaskList(newTaskList)
     
+    toast.success("Task added successfully", toastOptions);
     // setTaskList([...taskList, task]);
   }
 
@@ -47,6 +59,7 @@ const TaskWork = () => {
     })
 
     setTaskList(newTaskList)
+    toast.info("Task updated successfully", toastOptions);
   }
 
   return (
@@ -59,6 +72,7 @@ const TaskWork = () => {
         taskList={taskList} 
         handleUpdate={handleUpdate}
       />
+      <ToastContainer />
     </div>
   );
 };
