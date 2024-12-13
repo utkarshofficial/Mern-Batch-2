@@ -3,30 +3,21 @@ import { ToastContainer, toast } from "react-toastify";
 import TaskInput from "../components/TaskInput";
 import TaskList from "../components/TaskList";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import 'react-toastify/dist/ReactToastify.css';
 
 const TaskWork = () => {
-  const taskData = [
-    // generate 10 random task with keys (id, description, completed, time)
-    { 
-      id: 1, 
-      description: "Task 1", 
-      completed: false, 
-      time: "10:00 AM" 
-    },
-    { id: 2, description: "Task 2", completed: false, time: "11:00 AM" },
-    { id: 3, description: "Task 3", completed: false, time: "12:00 PM" },
-    { id: 4, description: "Task 4", completed: false, time: "1:00 PM" },
-    { id: 5, description: "Task 5", completed: false, time: "2:00 PM" },
-    { id: 6, description: "Task 6", completed: false, time: "3:00 PM" },
-    { id: 7, description: "Task 7", completed: false, time: "4:00 PM" },
-    { id: 8, description: "Task 8", completed: false, time: "5:00 PM" },
-    { id: 9, description: "Task 9", completed: false, time: "6:00 PM" },
-  ]
+  const [taskList, setTaskList] = useState([]);
 
-  const [taskList, setTaskList] = useState(taskData);
+  useEffect(() => {
+    const storedTasks = localStorage.getItem("tasks");
+    if (storedTasks) {
+      setTaskList(JSON.parse(storedTasks));
+    }
+
+  }, []);
+
 
   const toastOptions = {
     position: "bottom-right",
@@ -34,10 +25,12 @@ const TaskWork = () => {
   };
 
   const handleDelete = (taskId) => {
-    let newTask = taskList.filter((task) => {
+    let newTaskList = taskList.filter((task) => {
       return taskId !== task.id;
     });
-    setTaskList(newTask);
+    setTaskList(newTaskList);
+    // update, edit, delete task
+    localStorage.setItem("tasks", JSON.stringify(newTaskList));
     toast.success("Task deleted successfully", toastOptions);
   };
 
@@ -45,7 +38,8 @@ const TaskWork = () => {
   const handleAdd = (task) => {
     let newTaskList = [...taskList, task]
     setTaskList(newTaskList)
-    
+    // update, edit, delete task
+    localStorage.setItem("tasks", JSON.stringify(newTaskList));
     toast.success("Task added successfully", toastOptions);
     // setTaskList([...taskList, task]);
   }
@@ -59,6 +53,8 @@ const TaskWork = () => {
     })
 
     setTaskList(newTaskList)
+    // update, edit, delete task
+    localStorage.setItem("tasks", JSON.stringify(newTaskList));
     toast.info("Task updated successfully", toastOptions);
   }
 

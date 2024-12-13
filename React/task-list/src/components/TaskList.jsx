@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 
 const TaskList = ({ taskList, handleDelete, handleUpdate }) => {
   return (
-    <div className="h-[80%] overflow-auto">
+    taskList.length === 0 ? <p className="text-center w-full text-3xl m-3">No task found</p> : (
+      <div className="h-[80%] overflow-auto">
       {taskList.map((task) => (
         <TaskCard
           task={task}
@@ -13,6 +14,7 @@ const TaskList = ({ taskList, handleDelete, handleUpdate }) => {
         />
       ))}
     </div>
+    )
   );
 };
 
